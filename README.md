@@ -82,7 +82,7 @@ Updated on 14th  Dec 2025
 - New color palette
 - New font: Geist
 - Remove FAQ and moved it to new section
-- Remove AlpineJS and added vainilla JS
+- Remove AlpineJS and added vanilla JS
 ---
 
 ## Components
