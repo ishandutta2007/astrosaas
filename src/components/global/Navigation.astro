@@ -1,94 +1,116 @@
-<section class="bg-white border-b border-black/5">
-  <div class="w-full mx-auto md:px-12 px-8 max-w-7xl lg:px-16">
+---
+// Assets
+import Logo from "@/components/assets/Logo.astro";
+// Fundations
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+//Icons
+import Burger from "@/components/fundations/icons/Burger.astro";
+import Close from "@/components/fundations/icons/Close.astro";
+const navItems = [
+  { href: "#features", text: "Features" },
+  { href: "#pricing", text: "Pricing" },
+  { href: "#faq", text: "Faq" },
+];
+---
+
+<section class="bg-white">
+  <Wrapper variant="standard">
     <div
-      x-data="{ open: false }"
-      class="relative flex flex-col w-full py-5 mx-auto bg-white md:items-center md:justify-between md:flex-row md:px-6"
+      class="relative flex flex-col w-full py-2 bg-white md:items-center md:justify-between md:flex-row"
     >
       <div class="flex flex-row items-center justify-between lg:justify-start">
-        <a href="/" class="text-black inline-flex items-center gap-3">
-          <svg
-            class="h-4"
-            viewBox="0 0 78 32"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M55.5 0H77.5L58.5 32H36.5L55.5 0Z"
-              class="ccustom"
-              fill="#283CFF"></path>
-            <path
-              d="M35.5 0H51.5L32.5 32H16.5L35.5 0Z"
-              class="ccompli1"
-              fill="#5263FF"></path>
-            <path
-              d="M19.5 0H31.5L12.5 32H0.5L19.5 0Z"
-              class="ccompli2"
-              fill="#808CFF"></path>
-          </svg>
-          <span class="font-bold font-display">AstroSaas</span>
+        <a href="/">
+          <Logo class="textBase font-medium" />
         </a>
         <button
-          @click="open = !open"
+          id="nav-toggle"
           class="inline-flex items-center justify-center p-2 text-base-400 hover:text-black focus:outline-none focus:text-black md:hidden"
+          type="button"
+          aria-expanded="false"
         >
-          <svg
-            class="w-6 h-6"
-            stroke="currentColor"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <path
-              :class="{'hidden': open, 'inline-flex': !open }"
-              class="inline-flex"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16M4 18h16"></path>
-            <path
-              :class="{'hidden': !open, 'inline-flex': open }"
-              class="hidden"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
+          <Burger id="nav-open-icon" size="md" class="inline-flex" />
+          <Close id="nav-close-icon" size="md" class="hidden" />
         </button>
       </div>
       <nav
-        :class="{'flex': open, 'hidden': !open}"
-        class="flex-col items-center flex-grow gap-3 hidden md:pb-0 md:flex md:justify-end md:flex-row"
+        id="nav-menu"
+        class="flex-col items-center flex-grow gap-4 hidden md:flex md:justify-end md:flex-row w-full md:w-fit"
       >
-        <a
-          class=" text-sm font-medium text-black hover:text-accent-600 lg:ml-auto"
-          href="/#features">Features</a
-        >
-        <a
-          class=" text-sm font-medium text-black hover:text-accent-600"
-          href="/#pricing">Pricing</a
-        >
-
-        <a
-          class=" text-sm font-medium text-black hover:text-accent-600"
-          href="/faq"
-        >
-          Faq</a
-        >
-
-        <div class="inline-flex items-center gap-2 list-none lg:ml-auto">
-          <a
+        <div class="flex flex-col md:flex-row items-center gap-4">
+          {
+            navItems.map((item, index) => (
+              <a
+                class="text-sm font-medium text-base-600 hover:text-accent-700"
+                href={item.href}
+              >
+                {item.text}
+              </a>
+            ))
+          }
+        </div>
+        <div class="flex flex-col md:flex-row items-center gap-2">
+          <Button
+            variant="muted"
+            size="sm"
+            isLink
             href="/signup"
-            class="flex items-center justify-center transition-all duration-200 focus:ring-2 focus:outline-none text-base-500 bg-white hover:text-accent-500 ring-1 ring-base-200 focus:ring-accent-500 h-8 px-4 py-2 text-xs font-medium rounded-md"
+            class="w-full md:w-fit">Sign up</Button
           >
-            Sign up
-          </a>
-          <a
+          <Button
+            variant="default"
+            size="sm"
+            isLink
             href="/login"
-            class="flex items-center justify-center transition-all duration-200 ring-1 focus:ring-2 ring-base-100 focus:outline-none text-base-700 bg-base-50 hover:bg-white focus:ring-base-500/50 h-8 px-4 py-2 text-xs font-medium rounded-md"
+            class="w-full md:w-fit"
           >
-            Log in
-          </a>
+            Log in</Button
+          >
         </div>
       </nav>
     </div>
-  </div>
+  </Wrapper>
 </section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const toggleButton = document.getElementById("nav-toggle");
+    const navMenu = document.getElementById("nav-menu");
+    const openIcon = document.getElementById("nav-open-icon");
+    const closeIcon = document.getElementById("nav-close-icon");
+
+    if (toggleButton && navMenu && openIcon && closeIcon) {
+      toggleButton.addEventListener("click", () => {
+        const isHidden = navMenu.classList.contains("hidden");
+
+        if (isHidden) {
+          // Open menu
+          navMenu.classList.remove("hidden");
+          navMenu.classList.add("flex");
+
+          // Show Close icon, Hide Burger
+          openIcon.classList.add("hidden");
+          openIcon.classList.remove("inline-flex");
+
+          closeIcon.classList.remove("hidden");
+          closeIcon.classList.add("inline-flex");
+
+          toggleButton.setAttribute("aria-expanded", "true");
+        } else {
+          // Close menu
+          navMenu.classList.add("hidden");
+          navMenu.classList.remove("flex");
+
+          // Show Burger, Hide Close
+          openIcon.classList.remove("hidden");
+          openIcon.classList.add("inline-flex");
+
+          closeIcon.classList.add("hidden");
+          closeIcon.classList.remove("inline-flex");
+
+          toggleButton.setAttribute("aria-expanded", "false");
+        }
+      });
+    }
+  });
+</script>

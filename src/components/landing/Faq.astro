@@ -1,0 +1,110 @@
+---
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Icons
+import Plus from "@/components/fundations/icons/Plus.astro";
+const faqs = [
+  {
+    question: "What is a CRM system?",
+    answer:
+      "A CRM (Customer Relationship Management) system is a software platform designed to help businesses manage and analyze customer interactions and data throughout the customer lifecycle.",
+  },
+  {
+    question: "How do I get started with your CRM?",
+    answer:
+      "Simply sign up for an account, import your customer data, and start using our intuitive dashboard to manage your customer relationships effectively.",
+  },
+  {
+    question: "What features does your CRM offer?",
+    answer:
+      "We provide contact management, sales pipeline tracking, email integration, reporting and analytics, task automation, and customer communication tools.",
+  },
+  {
+    question: "Is there a free trial available?",
+    answer:
+      "Yes, we offer a 14-day free trial for new users to explore all our CRM features and see how it can benefit your business.",
+  },
+  {
+    question: "Can I integrate your CRM with other tools?",
+    answer:
+      "Absolutely! Our CRM supports integrations with popular business tools like Gmail, Outlook, Slack, Zapier, and many other marketing and sales platforms.",
+  },
+  {
+    question: "What kind of support do you provide?",
+    answer:
+      "We offer 24/7 customer support via chat, email, and phone, plus a comprehensive knowledge base, video tutorials, and dedicated account managers for enterprise clients.",
+  },
+  {
+    question: "Is my customer data secure?",
+    answer:
+      "Yes, we use industry-standard encryption, secure data centers, and comply with GDPR and other privacy regulations to protect your customer data.",
+  },
+  {
+    question: "Can I upgrade or downgrade my plan anytime?",
+    answer:
+      "Yes, you can change your plan at any time through your account settings. Upgrades take effect immediately, while downgrades apply at the next billing cycle.",
+  },
+  {
+    question: "Do you offer training for your CRM?",
+    answer:
+      "We provide extensive training resources including video tutorials, webinars, live training sessions, and a community forum where users can share tips and best practices.",
+  },
+  {
+    question: "What if I need to cancel my subscription?",
+    answer:
+      "You can cancel anytime from your account dashboard. We'll provide data export options and process any refunds according to our policy.",
+  },
+];
+---
+
+<section id="faq">
+  <Wrapper variant="standard" class="py-20">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-12">
+      <div>
+        <Text
+          tag="span"
+          variant="textSM"
+          class="leading-normal font-bold uppercase text-accent-700"
+        >
+          faq
+        </Text>
+        <Text
+          tag="h2"
+          variant="displayMD"
+          class="tracking-tight mt-4 font-semibold text-base-900"
+        >
+          Frequently asked questions
+        </Text>
+        <Text
+          tag="p"
+          variant="textBase"
+          class="mt-4 text-base-500 font-medium text-balance"
+        >
+          Answers to commonly asked questions about our CRM platform
+        </Text>
+      </div>
+      <div class="lg:col-span-2">
+        {
+          faqs.map((faq) => (
+            <details class="group pb-4">
+              <summary class="cursor-pointer flex items-center justify-between w-full  text-left font-medium select-none text-base-600 hover:text-accent-800 ">
+                <Text tag="h3" variant="textLG">
+                  {faq.question}
+                </Text>
+                <Plus class="size-5 duration-300 ease-out text-base-500 group-open:rotate-45" />
+              </summary>
+              <Text
+                tag="p"
+                variant="textBase"
+                class="pb-4 pt-2  text-base-500 text-balance"
+              >
+                {faq.answer}
+              </Text>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </Wrapper>
+</section>

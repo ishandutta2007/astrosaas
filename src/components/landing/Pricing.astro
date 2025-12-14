@@ -1,52 +1,130 @@
-<section x-data="{duration: 'monthly'}">
-  <div
-    class="mx-auto w-full lg:px-24 max-w-7xl md:px-12 items-center px-8 py-24"
-  >
+---
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Icons
+import Check from "@/components/fundations/icons/Check.astro";
+const pricingTiers = [
+  {
+    name: "Core",
+    subtitle: "For small teams and founders",
+    description:
+      "Everything you need to centralize leads, keep follow-ups on time, and stay organized.",
+    monthlyPrice: "$29.00",
+    annualPrice: "$19.00",
+    features: [
+      "Up to 1,500 contacts across 2 pipelines",
+      "Kanban board with stage automations",
+      "Gmail/Outlook and calendar sync",
+      "Tasks, reminders, and SLA timers",
+      "Standard reports and exports",
+      "Email and community support",
+    ],
+    cta: "Start Core",
+    buttonVariant: "default",
+    isPopular: false,
+    bgClass: "bg-base-50 ring-4 ring-base-50",
+    textClass: "text-base-900",
+    priceClass: "text-base-900",
+    descClass: "text-base-500",
+  },
+  {
+    name: "Momentum",
+    subtitle: "For scaling revenue teams",
+    description:
+      "Automation, shared inbox, and forecasting to keep every deal moving across the team.",
+    monthlyPrice: "$49.00",
+    annualPrice: "$39.00",
+    features: [
+      "Up to 15,000 contacts and 5 pipelines",
+      "Automation workflows and sequences",
+      "Shared inbox with collision detection",
+      "Custom fields, views, and dashboards",
+      "Forecasting and revenue analytics",
+      "API, webhooks, and priority support",
+    ],
+    cta: "Upgrade to Momentum",
+    buttonVariant: "muted",
+    isPopular: true,
+    bgClass: "bg-accent-950 ring-4 ring-accent-50",
+    textClass: "text-white",
+    priceClass: "text-white",
+    descClass: "text-base-200",
+  },
+  {
+    name: "Growth",
+    subtitle: "For established sales orgs",
+    description:
+      "Enterprise-ready controls with dedicated guidance for complex, multi-team pipelines.",
+    monthlyPrice: "$99.00",
+    annualPrice: "$79.00",
+    features: [
+      "Unlimited contacts, pipelines, and seats",
+      "Advanced permissions and SSO",
+      "Two-way data syncs and enrichment",
+      "Playbooks with approval workflows",
+      "Dedicated success manager",
+      "Exports, audit logs, and SLA-backed support",
+    ],
+    cta: "Talk to sales",
+    buttonVariant: "default",
+    isPopular: false,
+    bgClass: "bg-base-50 ring-4 ring-base-50",
+    textClass: "text-base-900",
+    priceClass: "text-base-900",
+    descClass: "text-base-500",
+  },
+];
+---
+
+<section id="pricing">
+  <Wrapper variant="standard" class="py-20">
     <div class="max-w-xl text-center mx-auto">
-      <p class="text-sm leading-normal font-bold uppercase text-accent-600">
-        Tagline
-      </p>
-      <h2
-        class="text-xl leading-tight tracking-tight sm:text-2xl md:text-3xl lg:text-4xl mt-4 font-semibold text-base-900 lg:text-balance"
+      <Text
+        tag="span"
+        variant="textSM"
+        class="leading-normal font-bold uppercase text-accent-700"
       >
-        Equip your business with world class software
-      </h2>
-      <p
-        class="text-base leading-normal mt-4 text-base-500 font-medium lg:text-balance"
+        pricing
+      </Text>
+      <Text
+        tag="h2"
+        variant="displayMD"
+        class="tracking-tight mt-4 font-semibold text-base-900"
       >
-        Choose a plan that works the best for you and your team. Start small,
-        upgrade when you need to.
-      </p>
+        CRM pricing for every stage
+      </Text>
+      <Text
+        tag="p"
+        variant="textBase"
+        class="mt-4 text-base-500 font-medium text-balance"
+      >
+        From founder-led sales to multi-team RevOps, pick the plan that keeps
+        deals moving.
+      </Text>
       <div
         aria-labelledby="pricing-toggle"
         class="w-full relative mt-8 ring-1 ring-base-200 ring-offset-2 bg-white overflow-hidden justify-center gap-4 mx-auto lg:mx-0 inline-flex p-1 rounded-md max-w-52 shadow z-0"
       >
-        <!-- Monthly Pricing Button: Sets 'duration' to 'monthly' when clicked -->
-        <!-- Sliding background -->
         <div
-          class="absolute inset-0 bg-base-50 rounded-md transition-transform duration-200 ease-in-out"
-          :class="duration === 'monthly' ? 'w-1/2 translate-x-0' : 'w-1/2 translate-x-full'"
+          id="pricing-indicator"
+          class="absolute inset-0 bg-accent-950 rounded-md transition-transform duration-200 ease-in-out w-1/2 translate-x-0"
         >
         </div>
-        <!-- Monthly Pricing Button -->
         <button
           id="monthly-pricing-button"
-          class="relative flex items-center justify-center w-full px-2 h-6 text-xs font-medium focus:outline-none transition-colors duration-300 z-10"
-          :class="duration === 'monthly' ? 'text-accent-600' : 'text-base-500 hover:text-accent-500'"
-          @click="duration = 'monthly'"
+          class="relative flex items-center justify-center w-full px-2 h-6 text-xs font-medium focus:outline-none transition-colors duration-300 z-10 text-white"
           type="button"
-          :aria-pressed="duration === 'monthly'"
+          aria-pressed="true"
         >
           Monthly
         </button>
-        <!-- Annual Pricing Button -->
         <button
           id="annual-pricing-button"
-          class="relative flex items-center justify-center w-full px-2 h-6 text-xs font-medium focus:outline-none transition-colors duration-300 z-10"
-          :class="duration === 'annual' ? 'text-accent-600' : 'text-base-500 hover:text-accent-500'"
-          @click="duration = 'annual'"
+          class="relative flex items-center justify-center w-full px-2 h-6 text-xs font-medium focus:outline-none transition-colors duration-300 z-10 text-base-500 hover:text-accent-500"
           type="button"
-          :aria-pressed="duration === 'annual'"
+          aria-pressed="false"
         >
           Annual
         </button>
@@ -55,526 +133,132 @@
     <div
       class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-12 mx-auto"
     >
-      <!-- Tier one -->
-      <div
-        class="flex flex-col h-full p-1 lg:py-1 rounded-3xl bg-base-50 ring-4 ring-base-50 border border-base-200"
-      >
-        <div>
+      {
+        pricingTiers.map((tier, index) => (
           <div
-            class="flex flex-col gap-4 p-8 bg-white rounded-[1.3rem] h-full "
+            class={`flex flex-col h-full p-1 lg:py-1 rounded-3xl ${tier.bgClass} border border-base-200`}
           >
-            <div class="flex items-start justify-between w-full">
+            <div
+              class={`p-8 ${tier.isPopular ? "bg-white/5" : "bg-white"} rounded-[1.3rem] flex flex-col justify-between`}
+            >
               <div>
-                <h3
-                  class="text-lg leading-normal sm:text-xl md:text-2xl font-medium text-base-900"
+                <div class="flex items-start justify-between w-full">
+                  <div>
+                    <Text
+                      tag="h3"
+                      variant="textBase"
+                      class={`font-medium ${tier.textClass}`}
+                    >
+                      {tier.name}
+                    </Text>
+                    <Text tag="p" variant="textSM" class={`${tier.descClass}`}>
+                      {tier.subtitle}
+                    </Text>
+                  </div>
+                  {tier.isPopular && (
+                    <span class="inline-flex items-center font-medium relative text-accent-800 bg-white px-2.5 py-1 text-xs rounded-md">
+                      Popular
+                    </span>
+                  )}
+                </div>
+                <Text
+                  tag="p"
+                  variant="textSM"
+                  class={` mt-4 ${tier.descClass}`}
                 >
-                  Core
-                </h3>
-                <p class="text-base leading-normal font-medium text-base-500">
-                  For individuals
-                </p>
+                  {tier.description}
+                </Text>
+                <Button
+                  variant={tier.buttonVariant}
+                  size="base"
+                  class="w-full mt-12"
+                >
+                  {tier.cta}
+                </Button>
               </div>
             </div>
-            <p class="text-base leading-normal font-medium text-base-500">
-              This subscription tier caters to individuals and hobbyists seeking
-              features.
-            </p>
-          </div>
-        </div>
-        <div class="p-8">
-          <p
-            class="font-semibold flex lg:text-3xl items-baseline text-2xl tracking-tighter text-base-900"
-          >
-            <span
-              data-monthly="$29.00"
-              data-annual="$19.00"
-              x-text="$el.dataset[duration]"></span>
-            <span
-              class="text-sm font-normal font-sans tracking-normal text-base-500"
-            >
-              <span x-show="duration === 'monthly'">/month</span>
-              <span x-show="duration === 'annual'" style="display: none"
-                >/annually</span
+            <div class="p-8 flex flex-col  ">
+              <Text
+                tag="p"
+                variant="displayMD"
+                class={`font-medium flex  items-baseline  ${tier.priceClass}`}
               >
-            </span>
-          </p>
-          <div class="w-full mt-4">
-            <button
-              class="flex items-center justify-center transition-all duration-200 focus:ring-2 focus:outline-none text-base-500 bg-white hover:text-accent-500 ring-1 ring-base-200 focus:ring-accent-500 h-9 px-4 py-2 text-sm font-medium rounded-md w-full"
-            >
-              Get Started
-            </button>
-          </div>
-          <div class="mt-8">
-            <p
-              class="text-sm leading-normal font-medium uppercase text-base-500"
-            >
-              Core plan includes:
-            </p>
-            <ul class="flex flex-col mt-4 gap-y-3 text-base-500" role="list">
-              <li class="flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check size-4"
+                <span
+                  id={`price-amount-${index}`}
+                  data-monthly={tier.monthlyPrice}
+                  data-annual={tier.annualPrice}
                 >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M5 12l5 5l10 -10"></path>
-                </svg>
-                <span class="text-base leading-normal">
-                  Unlimited members
+                  {tier.monthlyPrice}
                 </span>
-              </li>
-              <li class="flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check size-4"
+                <span
+                  class={`text-sm font-normal  tracking-normal ${tier.isPopular ? "text-white/70" : "text-base-500"}`}
                 >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M5 12l5 5l10 -10"></path>
-                </svg>
-                <span class="text-base leading-normal"> 1 Team </span>
-              </li>
-              <li class="flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check size-4"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M5 12l5 5l10 -10"></path>
-                </svg>
-                <span class="text-base leading-normal"> 50 issues </span>
-              </li>
-              <li class="flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check size-4"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M5 12l5 5l10 -10"></path>
-                </svg>
-                <span class="text-base leading-normal">
-                  Slack, GitHub, and API access
+                  <span id={`billing-monthly-${index}`}>/month</span>
+                  <span id={`billing-annual-${index}`} class="hidden">
+                    /annually
+                  </span>
                 </span>
-              </li>
-              <li class="flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check size-4"
+              </Text>
+              <div class="mt-12">
+                <Text
+                  tag="p"
+                  variant="textSM"
+                  class={`font-medium uppercase ${tier.descClass}`}
                 >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M5 12l5 5l10 -10"></path>
-                </svg>
-                <span class="text-base leading-normal">
-                  Basic reporting tools
-                </span>
-              </li>
-              <li class="flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check size-4"
+                  {tier.name} plan includes:
+                </Text>
+                <ul
+                  class={`flex flex-col mt-4 gap-y-3 ${tier.descClass}`}
+                  role="list"
                 >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M5 12l5 5l10 -10"></path>
-                </svg>
-                <span class="text-base leading-normal">
-                  Community support
-                </span>
-              </li>
-              <li class="flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check size-4"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M5 12l5 5l10 -10"></path>
-                </svg>
-                <span class="text-base leading-normal">
-                  Basic customization options
-                </span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <!-- Tier two -->
-      <div
-        class="flex flex-col h-full p-1 lg:py-1 rounded-3xl bg-base-950 ring-4 ring-base-50 border border-base-200"
-      >
-        <div>
-          <div
-            class="flex flex-col gap-4 p-8 bg-white/10 rounded-[1.3rem] h-full "
-          >
-            <div class="flex items-start justify-between w-full">
-              <div>
-                <h3
-                  class="text-lg leading-normal sm:text-xl md:text-2xl font-medium text-white"
-                >
-                  Momentum
-                </h3>
-                <p class="text-base leading-normal font-medium text-base-200">
-                  For startups
-                </p>
-              </div>
-              <span
-                class="inline-flex items-center font-medium relative text-base-700 bg-base-50 px-2.5 py-1 text-xs rounded-md"
-              >
-                Popular
-              </span>
-            </div>
-            <p class="text-base leading-normal font-medium text-base-200">
-              Tailored for expanding businesses, this tier offers advanced tools
-              and analytics.
-            </p>
-          </div>
-        </div>
-        <div class="p-8">
-          <p
-            class="font-semibold flex lg:text-3xl items-baseline text-2xl tracking-tighter text-white"
-          >
-            <span
-              data-monthly="$49.00"
-              data-annual="$39.00"
-              x-text="$el.dataset[duration]"></span>
-            <span
-              class="text-sm font-normal font-sans tracking-normal text-white/50"
-            >
-              <span x-show="duration === 'monthly'">/month</span>
-              <span x-show="duration === 'annual'" style="display: none"
-                >/annually</span
-              >
-            </span>
-          </p>
-          <div class="w-full mt-4">
-            <button
-              class="flex items-center justify-center transition-all duration-200 focus:ring-2 focus:outline-none text-base-500 bg-white hover:text-accent-500 ring-1 ring-base-200 focus:ring-accent-500 h-9 px-4 py-2 text-sm font-medium rounded-md w-full"
-            >
-              Get Started
-            </button>
-          </div>
-          <div class="mt-8">
-            <p
-              class="text-sm leading-normal font-medium uppercase text-base-200"
-            >
-              Momentum plan includes:
-            </p>
-            <ul class="flex flex-col mt-4 gap-y-3 text-base-200" role="list">
-              <li class="flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check size-4"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M5 12l5 5l10 -10"></path>
-                </svg>
-                <span class="text-base leading-normal"> Unlimited teams </span>
-              </li>
-              <li class="flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check size-4"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M5 12l5 5l10 -10"></path>
-                </svg>
-                <span class="text-base leading-normal">
-                  Private teams and guests
-                </span>
-              </li>
-              <li class="flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check size-4"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M5 12l5 5l10 -10"></path>
-                </svg>
-                <span class="text-base leading-normal"> Insights </span>
-              </li>
-              <li class="flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check size-4"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M5 12l5 5l10 -10"></path>
-                </svg>
-                <span class="text-base leading-normal">
-                  Custom branding options
-                </span>
-              </li>
-              <li class="flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check size-4"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M5 12l5 5l10 -10"></path>
-                </svg>
-                <span class="text-base leading-normal">
-                  Collaboration tools
-                </span>
-              </li>
-              <li class="flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check size-4"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M5 12l5 5l10 -10"></path>
-                </svg>
-                <span class="text-base leading-normal">
-                  Mobile app access
-                </span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <!-- Tier three -->
-      <div
-        class="flex flex-col h-full p-1 lg:py-1 rounded-3xl bg-accent-700 ring-4 ring-base-50 border border-base-200"
-      >
-        <div>
-          <div
-            class="flex flex-col gap-4 p-8 bg-white/10 rounded-[1.3rem] h-full "
-          >
-            <div class="flex items-start justify-between w-full">
-              <div>
-                <h3
-                  class="text-lg leading-normal sm:text-xl md:text-2xl font-medium text-white"
-                >
-                  Growth
-                </h3>
-                <p class="text-base leading-normal font-medium text-base-200">
-                  For corporates
-                </p>
+                  {tier.features.map((feature) => (
+                    <li class="flex items-start gap-2">
+                      <Check size="sm" />
+                      <span class="text-sm leading-normal">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
-            <p class="text-base leading-normal font-medium text-base-200">
-              Designed for established businesses, providing comprehensive
-              tools.
-            </p>
           </div>
-        </div>
-        <div class="p-8">
-          <p
-            class="font-semibold flex lg:text-3xl items-baseline text-2xl tracking-tighter text-white"
-          >
-            <span
-              data-monthly="$99.00"
-              data-annual="$79.00"
-              x-text="$el.dataset[duration]"></span>
-            <span
-              class="text-sm font-normal font-sans tracking-normal text-accent-100"
-            >
-              <span x-show="duration === 'monthly'">/month</span>
-              <span x-show="duration === 'annual'" style="display: none"
-                >/annually</span
-              >
-            </span>
-          </p>
-          <div class="w-full mt-4">
-            <button
-              class="flex items-center justify-center transition-all duration-200 focus:ring-2 focus:outline-none text-base-500 bg-white hover:text-accent-500 ring-1 ring-base-200 focus:ring-accent-500 h-9 px-4 py-2 text-sm font-medium rounded-md w-full"
-            >
-              Get Started
-            </button>
-          </div>
-          <div class="mt-8">
-            <p
-              class="text-sm leading-normal font-medium uppercase text-base-200"
-            >
-              Growth plan includes:
-            </p>
-            <ul class="flex flex-col mt-4 gap-y-3 text-base-200" role="list">
-              <li class="flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check size-4"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M5 12l5 5l10 -10"></path>
-                </svg>
-                <span class="text-base leading-normal">
-                  Unlimited members
-                </span>
-              </li>
-              <li class="flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check size-4"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M5 12l5 5l10 -10"></path>
-                </svg>
-                <span class="text-base leading-normal">
-                  Advanced analytics
-                </span>
-              </li>
-              <li class="flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check size-4"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M5 12l5 5l10 -10"></path>
-                </svg>
-                <span class="text-base leading-normal"> Priority support </span>
-              </li>
-              <li class="flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check size-4"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M5 12l5 5l10 -10"></path>
-                </svg>
-                <span class="text-base leading-normal">
-                  Custom API integration
-                </span>
-              </li>
-              <li class="flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check size-4"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M5 12l5 5l10 -10"></path>
-                </svg>
-                <span class="text-base leading-normal">
-                  Unlimited storage
-                </span>
-              </li>
-              <li class="flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check size-4"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M5 12l5 5l10 -10"></path>
-                </svg>
-                <span class="text-base leading-normal">
-                  Enhanced security
-                </span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
+        ))
+      }
     </div>
-  </div>
+  </Wrapper>
 </section>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const monthlyBtn = document.getElementById("monthly-pricing-button");
+    const annualBtn = document.getElementById("annual-pricing-button");
+    const indicator = document.getElementById("pricing-indicator");
+    if (!monthlyBtn || !annualBtn || !indicator) return;
+    const togglePricing = (isMonthly) => {
+      const activeClass = "text-white";
+      const inactiveClasses = ["text-base-500", "hover:text-accent-500"];
+      // Update buttons
+      [monthlyBtn, annualBtn].forEach((btn, idx) => {
+        const active = idx === 0 ? isMonthly : !isMonthly;
+        btn.setAttribute("aria-pressed", active.toString());
+        btn.classList.toggle(activeClass, active);
+        inactiveClasses.forEach((c) => btn.classList.toggle(c, !active));
+      });
+      // Update indicator
+      indicator.classList.toggle("translate-x-0", isMonthly);
+      indicator.classList.toggle("translate-x-full", !isMonthly);
+      // Update amounts
+      document.querySelectorAll('[id^="price-amount-"]').forEach((el) => {
+        if (el instanceof HTMLElement)
+          el.textContent = el.dataset[isMonthly ? "monthly" : "annual"] || "";
+      });
+      // Update labels
+      document
+        .querySelectorAll('[id^="billing-monthly-"]')
+        .forEach((el) => el.classList.toggle("hidden", !isMonthly));
+      document
+        .querySelectorAll('[id^="billing-annual-"]')
+        .forEach((el) => el.classList.toggle("hidden", isMonthly));
+    };
+    monthlyBtn.addEventListener("click", () => togglePricing(true));
+    annualBtn.addEventListener("click", () => togglePricing(false));
+  });
+</script>

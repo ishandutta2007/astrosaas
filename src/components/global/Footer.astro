@@ -1,12 +1,15 @@
 ---
+// Assets
+import Logo from "@/components/assets/Logo.astro";
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 const sections = [
   {
     title: "All pages",
     links: [
       { name: "Home", href: "/" },
-      { name: "FAQ", href: "/faq" },
       { name: "Terms", href: "/terms" },
-      { name: "Privacy", href: "/privacy" },
       { name: "Sign up", href: "/signup" },
       { name: "Sign In", href: "/signup" },
     ],
@@ -43,49 +46,35 @@ const sections = [
     ],
   },
 ];
+const currentYear = new Date().getFullYear();
 ---
 
 <footer>
-  <div class="px-8 py-20 mx-auto md:px-12 lg:px-24 max-w-7xl">
+  <Wrapper variant="standard" class="py-12">
     <div class="grid grid-cols-2 lg:grid-cols-4 items-start gap-x-8 gap-y-24">
-      <a
-        href="/"
-        class="xl:col-span-1 text-black inline-flex items-center gap-3"
-      >
-        <svg
-          class="h-4"
-          viewBox="0 0 78 32"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M55.5 0H77.5L58.5 32H36.5L55.5 0Z"
-            class="ccustom"
-            fill="#283CFF"></path>
-          <path
-            d="M35.5 0H51.5L32.5 32H16.5L35.5 0Z"
-            class="ccompli1"
-            fill="#5263FF"></path>
-          <path
-            d="M19.5 0H31.5L12.5 32H0.5L19.5 0Z"
-            class="ccompli2"
-            fill="#808CFF"></path>
-        </svg>
-        <span class="font-bold font-display">AstroSaas</span>
+      <a href="/">
+        <Logo class="textBase font-medium" />
       </a>
       <div
-        class="md:grid md:grid-cols-2 xl:grid-cols-4 md:gap-8 text-sm leading-normal text-base-500 font-medium lg:col-span-3"
+        class="grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-4 lg:col-span-3"
       >
         {
           sections.map(({ title, links }) => (
-            <div class="mt-12 md:mt-0">
-              <h3 class="text-lg text-black font-medium tracking-tight">
+            <div>
+              <Text
+                tag="h3"
+                variant="textSM"
+                class=" text-base-900 font-medium uppercase"
+              >
                 {title}
-              </h3>
+              </Text>
               <ul role="list" class="mt-4 space-y-1">
                 {links.map(({ name, href }) => (
                   <li>
-                    <a href={href} class="hover:text-black">
+                    <a
+                      href={href}
+                      class="text-sm font-medium text-base-500 hover:text-accent-600"
+                    >
                       {name}
                     </a>
                   </li>
@@ -96,22 +85,17 @@ const sections = [
         }
       </div>
     </div>
-  </div>
-</footer>
-<footer class="bg-white">
-  <div
-    class="mx-auto w-full lg:px-24 max-w-7xl md:px-12 items-center px-8 py-6"
-  >
-    <div class="border-t pt-6 border-base-200">
+    <div class="border-t pt-6 border-base-200 mt-8">
       <p class="text-xs text-base-500 lg:col-span-2">
-        © 2025 Lexington Themes. All rights reserved. Lexington Themes is not
-        affiliated with Astro or Tailwind Labs team, nor is it endorsed by or
-        sponsored by this ones. A side project by <a
-          class="text-sm text-black hover:text-accent-400 underline"
+        © {currentYear} Lexington Themes. All rights reserved. The biggest Astro
+        collection with premium themes. Clean code. Modern design. Easy to customize.
+        Production-ready. Trusted by 8,000+ freelancers, startups, and agencies —
+        Awarded by Astro. A side project by <a
+          class="text-sm text-black hover:text-accent-700 underline"
           href="https://michaelandreuzza.com/">Michael Andreuzza</a
         > This website was built with Astro &amp; Tailwind. Crafted in Åland Islands,
         Finland.
       </p>
     </div>
-  </div>
+  </Wrapper>
 </footer>
